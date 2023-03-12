@@ -1,12 +1,18 @@
 package com.example.notes
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface NotesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun 
+     fun insert(note: Note)
+    @Update
+     fun update(note: Note)
+    @Delete
+     fun delete(note: Note)
+    @Query("Select * from notesTable order by id ASC")
+    fun getAllNotes():LiveData<List<Note>>
+
 
 }
